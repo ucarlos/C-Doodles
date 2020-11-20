@@ -34,7 +34,7 @@ private:
     bool chosen{false};
 };
 
-void draw_board(vector<Mark> &vm);
+void draw_board(const vector<Mark> &vm);
 
 class Player{
 public:
