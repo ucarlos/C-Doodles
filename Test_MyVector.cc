@@ -1,7 +1,9 @@
+#include <iostream>
 #include "./My_Vector.h"
 
-#include <iostream>
 int main(void){
-	std::cout << "Simple test..." << std::endl;
-    my_vector_base<double> te;
+    my_vector<double> test;
+    test.resize(100, 10.2);
+    test.resize(120);
+
 }
