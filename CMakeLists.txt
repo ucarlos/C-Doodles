@@ -16,6 +16,7 @@ add_executable(Tic_Tak_Toe Tic_Tak_Toe.cc)
 add_executable(My_Vector Test_MyVector.cc My_Vector.cc)
 add_executable(OS_Homework02 Homework2.c)
 add_executable(OS_Homework03 Homework3.cc)
+add_executable(Integer_to_English Integer_to_English.cc)
 
 
 add_executable(TagReader tagreader.cpp)

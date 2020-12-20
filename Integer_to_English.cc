@@ -16,6 +16,11 @@
 #include <vector>
 using namespace std;
 
+/**
+ * number_group_to_english
+ *
+ * @param str 
+ */
 std::string number_group_to_english(const std::string &str){
 	if (str.empty())
 		throw runtime_error("Error: Cannot have an empty string as parameter.");
@@ -80,6 +85,14 @@ std::string number_group_to_english(const std::string &str){
 }
 
 
+/**
+ * integer_to_english: A program that converts a integer into its english word
+ * representation. This is done by breaking the number into groups of three and
+ * passing each group to number_group_to_english, applying the appropriate
+ * group name (such as thousand, million, billion, etc).
+ *
+ * @param val contains an int64_t number to be parsed.
+ */
 std::string integer_to_english(const int64_t val){
 	// The program breaks the number into groups of three, and then parses its
 	// value and then adds the appropriate modifier. In order to consider the maximum
