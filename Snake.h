@@ -10,6 +10,7 @@
 #ifndef SNAKE_H
 #define SNAKE_H
 
+#include <iostream>
 #include <list>
 #include <cstdint>
 #include <vector>
@@ -62,15 +63,23 @@ private:
 };
 
 class Snake {
-public:
-	Snake() =default;
-	
 private:
 	std::vector<Snake_Node> list{4};
 	std::list<std::tuple<Direction, std::int32_t>> direction_list;
-	
+
+
+public:
+	Snake() =default;	
+	void clear_direction_list() { direction_list.clear(); }
+	void insert_direction(std::tuple<Direction, std::int32_t> tuple);
+	void remove_front_direction();
+	void remove_back_direction();
 };
 
 
 
+// Additional Function declarations
+void draw_screen(std::ostream &os, const std::vector<Tile> &tile_vector);
+
+void main_menu();
 #endif

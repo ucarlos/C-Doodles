@@ -18,11 +18,12 @@ add_executable(OS_Homework02 Homework2.c)
 add_executable(OS_Homework03 Homework3.cc)
 add_executable(Integer_to_English Integer_to_English.cc)
 
+add_executable(Snake Snake.cc)
 
 add_executable(TagReader tagreader.cpp)
 target_include_directories(TagReader PUBLIC /usr/include/taglib)
 target_link_libraries(TagReader tag)
-
+target_link_libraries(Snake pthread)
 target_link_libraries(OS_Homework02 pthread)
 target_link_libraries(OS_Homework03 pthread)
 target_link_libraries(Newt newt)
