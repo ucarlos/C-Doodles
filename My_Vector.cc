@@ -19,7 +19,7 @@ template<class T, class A> my_vector<T, A>::my_vector(const my_vector<T, A> &vec
     // get the size;
     T *p = new T[vec.sz];
     for (int i = 0; i < vec.sz; i++)
-	p[i] = vec.elem[i];
+		p[i] = vec.elem[i];
     
     // Now delete old elem:
     delete[] elem;
@@ -30,13 +30,13 @@ template<class T, class A> my_vector<T, A>::my_vector(const my_vector<T, A> &vec
 // Copy assignment
 template<class T, class A> my_vector<T, A>& my_vector<T, A>::operator=(const my_vector<T, A> &vec){
     if (this == &vec)
-	return *this;
+		return *this;
 
     if (vec.sz <= space){
-	for (int i = 0; i < vec.sz; i++)
-	    elem[i] = vec.elem[i];
-	this->sz = vec.sz;
-	return *this;
+		for (int i = 0; i < vec.sz; i++)
+			elem[i] = vec.elem[i];
+		this->sz = vec.sz;
+		return *this;
     }
 
     // Otherwise, if the sz is larger than the space,
@@ -45,7 +45,7 @@ template<class T, class A> my_vector<T, A>& my_vector<T, A>::operator=(const my_
 
     T *p = new T[vec.sz];
     for (int i = 0; i < vec.sz; i++)
-	p[i] = vec.elem[i];
+		p[i] = vec.elem[i];
 
     delete[] elem; // Deallocate old space
     elem = p; // assign new pointer
@@ -70,13 +70,13 @@ template<class T, class A> my_vector<T, A>::my_vector(my_vector<T, A> &&vec){
 template<class T, class A> my_vector<T, A>& my_vector<T, A>::operator=(my_vector<T, A> &&vec){
     // Do nothing if vec is the same as this
     if (this == &vec)
-	return *this;
+		return *this;
     
     for (int i = 0; i < sz; i++)
-	alloc.destroy(&elem[i]);
+		alloc.destroy(&elem[i]);
 
     for (int i = 0; i < space; i++)
-	alloc.deallocate(&elem[i]);
+		alloc.deallocate(&elem[i]);
     
     elem = vec.elem;
     sz = vec.sz;
@@ -97,7 +97,7 @@ template<class T, class A> my_vector<T, A>::my_vector(std::initializer_list<T> l
     // for (unsigned int i = 0; i < lst.size(); i++)
     // 	elem[i] = *it++;
     for (unsigned int i = 0; i < lst.size(); i++)
-	alloc.construct(&p[i], *it++);
+		alloc.construct(&p[i], *it++);
 
     elem = p;
     
@@ -107,11 +107,11 @@ template<class T, class A> my_vector<T, A>::my_vector(std::initializer_list<T> l
 template<class T, class A> my_vector<T,A>::~my_vector(){
     //First destroy all elements:
     for (int i = 0; i <sz; i++)
-	alloc.destroy(&elem[i]);
+		alloc.destroy(&elem[i]);
 
     // Now deallocate memory:
     for (int i = 0; i < space; i++)
-	alloc.deallocate(&elem[i]);
+		alloc.deallocate(&elem[i]);
 
 }
 //------------------------------------------------------------------------------
@@ -126,15 +126,15 @@ template<class T, class A> void my_vector<T, A>::resize(int new_size, T val){
     // for (int i = sz; i < space; i++)
     // 	elem[i] = 0;
     // Construct 
-    for (int i = sz; i < new_size; i++)
-	alloc.construct(&elem[i], val);
+		   for (int i = sz; i < new_size; i++)
+			   alloc.construct(&elem[i], val);
 
-    sz = new_size;
+		   sz = new_size;
 }
 
 template<class T, class A> T& my_vector<T, A>::at(int n){
     if (!(0 <= n && n < sz))
-	throw std::runtime_error("Out of Range");
+		throw std::runtime_error("Out of Range");
     
     return elem[n];
 }
@@ -142,9 +142,9 @@ template<class T, class A> T& my_vector<T, A>::at(int n){
 template<class T, class A> void my_vector<T, A>::push_back(const T &val){
     // Make sure that we have enough space
     if (!space)
-	reserve(8); // Reserve eight blocks
+		reserve(8); // Reserve eight blocks
     else if (sz == space)
-	reserve(2 * space); // Double space if at capacity
+		reserve(2 * space); // Double space if at capacity
 
     alloc.construct(&elem[sz], val);
     sz++;
@@ -158,10 +158,10 @@ template<class T, class A> void my_vector<T,A>::reserve(int newalloc){
     T *p = alloc.allocate(newalloc);
     // construct
     for (int i = 0; i < sz; i++)
-	alloc.construct(&p[i], elem[i]);
+		alloc.construct(&p[i], elem[i]);
     // Deconstruct old memory
     for (int i = 0; i < sz; i++)
-	alloc.destroy(&elem[i]);
+		alloc.destroy(&elem[i]);
     // Deallocate old memory
     alloc.deallocate(elem, space);
     

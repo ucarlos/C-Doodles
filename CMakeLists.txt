@@ -20,9 +20,14 @@ add_executable(Integer_to_English Integer_to_English.cc)
 
 add_executable(Snake Snake.cc)
 
+add_executable(emms-print-metadata emms-print-metadata.cpp)
+
+add_executable(Connect_Four Connect_Four.cc)
+
 add_executable(TagReader tagreader.cpp)
 target_include_directories(TagReader PUBLIC /usr/include/taglib)
 target_link_libraries(TagReader tag)
+target_link_libraries(emms-print-metadata tag)
 target_link_libraries(Snake pthread)
 target_link_libraries(OS_Homework02 pthread)
 target_link_libraries(OS_Homework03 pthread)
