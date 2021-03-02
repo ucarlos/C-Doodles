@@ -7,6 +7,7 @@
  * -----------------------------------------------------------------------------
  */
 
+#include <ios>
 #include <iostream>
 #include <array>
 #include <set>
@@ -152,30 +153,35 @@ bool Player::check_vertical() {
  * Check if the player has a horizontal row of 4 of his own pieces.
  */
 bool Player::check_horizontal() {
-	int x_val = std::get<0>(*piece_set.begin());
-	
-	int horizontal_count = 1;
-	for (auto i = ++piece_set.begin(); i != piece_set.end(); i++) {
-		int temp_x = std::get<0>(*i);
+	int horizontal_count{};
+	int x_val, y_val;
+	Tile_Tuple temp_tuple;
+	for (auto &piece : piece_set) {
+		temp_tuple = piece;
+		x_val = std::get<0>(piece);
+		y_val = std::get<1>(piece);
+		horizontal_count = 1;
 
-		if (temp_x == x_val)
-			horizontal_count++;
-		else {
-			x_val = temp_x;
-			horizontal_count = 0;			
+		for (int i = 1; i < 4; i++) {
+			std::get<0>(temp_tuple) = x_val + i;
+			auto check = piece_set.find(temp_tuple);
+			if (check != piece_set.end()) {
+				horizontal_count++;
+				if (horizontal_count == 4)
+					return true;
+			}
+			else break;
 		}
-
 	}
 
-	return (horizontal_count == 4);
+	return false;
 }
 
 /**
  * Check if the player has a diagonal row of 4 of his own pieces.
  */
 bool Player::check_diagonal() {
-	// Check for positive and negative slopes.
-	
+	// Check for positive and negative slopes.	
 	// Positive Slope
 	int x_val;
 	int y_val;
@@ -200,7 +206,6 @@ bool Player::check_diagonal() {
 			else break;
 		}
 	}
-
 	   
 	// Negative Slope check:
 	diagonal_count = 1;
@@ -312,25 +317,6 @@ done:
 	}
 }
 
-void debug() {
-	Player player1{'@'};
-	Player player2{'$'};
-	player1.add_tuple(0, 0);
-	player1.add_tuple(0, 1);
-	player1.add_tuple(1, 1);
-	player1.add_tuple(2, 2);
-	player1.add_tuple(3, 3);
-	player1.add_tuple(3, 2);
-
-	player2.add_tuple(1, 0);
-	player2.add_tuple(2, 0);
-	player2.add_tuple(2, 1);
-	player2.add_tuple(3, 0);
-	player2.add_tuple(3, 3);
-
-	cout << "Result: " << boolalpha << player1.check_win_condition() << endl;
-}
-
 int main(void) {
 	Player player1{'@'};
 	Player player2{'$'};
@@ -338,6 +324,5 @@ int main(void) {
 		player_turn(tile_map, player1);
 		player_turn(tile_map, player2);
 	}
-	// debug();
-	
+	// debug();	
 }
