@@ -56,7 +56,7 @@ std::array<std::array<Tile, max_columns>, max_rows> tile_map;
 void draw_tile_map(std::array<std::array<Tile, max_columns>, max_rows> &tilem) {
 	for (auto it = tilem.rbegin(); it != tilem.rend(); it++) {
 		for (auto &col: *it)
-			cout << col.get_tile_character() << " ";
+			cout << col.get_tile_character() << "  ";
 		cout << endl;
 	}	
 }
@@ -118,10 +118,7 @@ void Player::add_tuple(int row, int column) {
  */
 bool Player::check_win_condition() {
 	bool check_win;
-	if (term_num == 4)
-		check_win = check_vertical() or check_diagonal() or check_horizontal();
-	else
-		check_win = check_vertical() or check_diagonal() or check_horizontal();
+	check_win = check_vertical() or check_diagonal() or check_horizontal();
 
 	return check_win;
 }
@@ -130,19 +127,19 @@ bool Player::check_win_condition() {
  * Check if the player has a vertical row of 4 of his own pieces.
  */
 bool Player::check_vertical() {
-	// Check if the y component is the same for four pieces.
-	int y_val = std::get<1>(*piece_set.begin());
+	// Check if the x component is the same for four pieces.
+	int x_val = std::get<0>(*piece_set.begin());
 	
 	int vertical_count = 1;
 		
 	for (auto i = ++piece_set.begin(); i != piece_set.end(); i++) {
-		int temp_y = std::get<1>(*i);
+		int temp_y = std::get<0>(*i);
 		
-		if (temp_y == y_val)
+		if (temp_y == x_val)
 			vertical_count++;
 		else {
-			y_val = temp_y;
-			vertical_count = 0;
+			x_val = temp_y;
+			vertical_count = 1;
 		}
 	}
 	
@@ -238,8 +235,8 @@ bool Player::check_diagonal() {
 unsigned int get_column_size(array < array < Tile, max_columns >, max_rows > &tilem,
 							 int column) {
 	unsigned length = 0;
-	for (int i = 0; i < tilem.size(); i++)
-		if (tilem.at(i).at(column).is_full())
+	for (auto & i : tilem)
+		if (i.at(column).is_full())
 			length++;
 
 	return length;
@@ -296,8 +293,8 @@ input:	// Disgusting label
 	}
 
 	column_size = get_column_size(tilem, column - 1);
-	if (column_size == max_columns) {
-		cout << "Column " << column << "is full. Try again.\n";
+	if (column_size == max_rows) {
+		cout << "Column " << column << " is full. Try again.\n";
 		goto input; // Disgusting GOTO but it works
 	}
 
