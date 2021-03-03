@@ -7,14 +7,11 @@
  * -----------------------------------------------------------------------------
  */
 
-#include <ios>
 #include <iostream>
 #include <array>
 #include <set>
 #include <tuple>
 #include <string>
-#include <cstdint>
-#include <cctype>
 using namespace std;
 
 //------------------------------------------------------------------------------
