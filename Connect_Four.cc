@@ -11,7 +11,6 @@
 #include <array>
 #include <set>
 #include <tuple>
-#include <string>
 using namespace std;
 
 //------------------------------------------------------------------------------
@@ -30,9 +29,9 @@ class Tile {
 public:
 	Tile() =default;
 	explicit Tile(char cha): ch{cha} { }	
-	char get_tile_character() const { return ch; }
+	[[nodiscard]] char get_tile_character() const { return ch; }
 	void set_tile_character(char ch) { this->ch = ch; }
-	bool is_title_character(char newch) { return ch == newch; }
+	[[nodiscard]] bool is_title_character(char newch) const { return ch == newch; }
 
 	// Function to check if a tile has been set by a player.
 	bool is_full() { return selected; }
@@ -86,7 +85,7 @@ public:
 	void add_tuple(Tile_Tuple t);
 	void add_tuple(int row, int column);
 	bool check_win_condition();
-	const char get_player_token() { return player_char; }
+	[[nodiscard]] char get_player_token() const { return player_char; }
 	void set_player_token(char ch) { player_char = ch; }
 	void increment_turn() { term_num++; }
 private:

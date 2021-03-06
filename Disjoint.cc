@@ -31,6 +31,8 @@ template<class T> bool disjoint(vector<T> &group1,
 		// auto find2  = find(group2.begin(), group2.end(), i);
 		// auto find3 = find(group3.begin(), group3.end(), i);
 		auto find2 = binary_search(group2.begin(), group2.end(), i);
+		
+		if (!find2) continue;
 		auto find3 = binary_search(group3.begin(), group3.end(), i);
 		
 		// bool check = (find2 != group2.end()) and (find3 != group3.end());
