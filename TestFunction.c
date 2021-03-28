@@ -1,7 +1,9 @@
 //
 // Created by ulysses on 3/12/19.
 //
-#include "../common_header.h"
+#include "./common_header.h"
+
+
 #include <math.h>
 #define FLOAT_SIZE (sizeof(float) * 8)
 #define DOUBLE_SIZE (sizeof(double) * 8)
