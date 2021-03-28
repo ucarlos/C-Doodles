@@ -19,11 +19,9 @@ using namespace std;
 // group3 = [2, 4, 6, 10, -2, -4]
 // 6 is the key in all of them:
 
-template<class T> bool disjoint(vector<T> &group1,
-								vector<T> &group2,
-								vector<T> &group3) {
-
-
+template<class T> bool disjoint(vector<T> group1,
+								vector<T> group2,
+								vector<T> group3) {
 	sort(group2.begin(), group2.end());
 	sort(group3.begin(), group3.end());
 	

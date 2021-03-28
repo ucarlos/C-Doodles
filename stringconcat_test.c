@@ -8,7 +8,7 @@
 int main(void){
     char *source = calloc(50, sizeof(char));
     strncpy(source, "Test: ", 30);
-    char *destin = "Noah likes Anime";
+    char *destin = "Noah likes anime";
 
     printf("Intial: ");
     puts(source);
