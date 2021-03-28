@@ -63,7 +63,9 @@ template<class T, class A> my_vector<T,A>::my_vector(int s) {
 }
 
 
-
+/**
+ *
+ */
 template<class T, class A> my_vector<T,A>::my_vector(const my_vector<T,A> &vec) {
 	// Allocate the size of vec.size
 	T *p = alloc.allocate(vec.size());
@@ -77,80 +79,49 @@ template<class T, class A> my_vector<T,A>::my_vector(const my_vector<T,A> &vec) 
 	elem = p;
 }
 
-// template<class T, class A> my_vector<T, A>& my_vector<T,A>::operator=(const my_vector<T, A> &vec) {
+template<class T, class A> my_vector<T, A>&
+    my_vector<T,A>::operator=(const my_vector<T, A> &vec) {
+	if (this == &vec)
+		return *this;
 
-// }
+	if (vec.sz <= this->space) {
 
-// template<class T, class A> my_vector<T, A>& my_vector<T, A>::operator=(const my_vector<T, A> &vec){
-//     if (this == &vec)
-// 	return *this;
+		// If the size of vec is smaller than currently allocated space, then destroy
+		// all current object and reconstruct from vec.
 
-//     // If size of vec is smaller than space, destroy the current space and then
-//     if (vec.sz <= this->space){ //
-// 	// First, destroy elem:
-// 	for (int i = 0; i < this->sz; i++)
-// 	    this->alloc.destroy(&this->elem[i]);
+		for (int i = 0; i < this->sz; i++)
+			this->alloc.destroy(&this->elem[i]);
 
-// 	for (int i = 0; i < vec.sz; i++)
-// 	    this->alloc.construct(&this->elem[i], vec.elem[i]);
+		for (int i = 0; i < vec.sz; i++)
+			this->alloc.construct(&this->elem[i], vec.elem[i]);
 
-// 	this->sz = vec.sz;
-// 	return *this;
+		// Set size:
+		this->sz = vec.sz;
+		return *this;
+	}
 
-//     }
+	// Otherwise, if vec.sz is larger than space, allocate enough space and then copy all
+	// data from vec to new elem.
 
-//     // Otherwise, if the sz is larger than the space,
-//     // allocate enough space, and then copy all data from vec
-//     // to the new elem.
+	T *temp = alloc.allocate(vec.sz);
 
-//     my_vector_base<T,A> b(this->alloc, vec.sz);
-//     std::uninitialized_copy(vec.elem, &vec.elem[vec.sz], b.elem);
+	for (int i = 0; i < vec.sz; i++) {
+		alloc.construct(&temp[i], vec.elem[i]);
+	}
 
-//     for (int i = 0; i < this->sz; i++)
-// 	this->alloc.destroy(&this->elem[i]);
+	// Destroy and deallocate elem:
+	for (int i = 0; i < this->sz; i++)
+		alloc.destroy(&this->elem[i]);
 
-//     // Now swap representations:
-//     std::swap<my_vector_base<T,A>>(*this, b);
-//     // T *p = new T[vec.sz];
-//     // for (int i = 0; i < vec.sz; i++)
-//     // 	p[i] = vec.elem[i];
+	alloc.deallocate(this->elem, this->space);
+	
+	elem = temp;
+	this->sz = this->space = vec.sz;
+	
+	return *this; // Return a self-reference.
+	
+}
 
-//     // delete[] elem; // Deallocate old space
-//     // elem = p; // assign new pointer
-
-
-//     this->sz = this->space = vec.sz; // Set new size
-
-//     return *this; // Return a self-reference.
-// }
-
-
-// Copy assignment
-// template<class T, class A> my_vector<T, A>& my_vector<T, A>::operator=(const my_vector<T, A> &vec){
-//     if (this == &vec)
-// 		return *this;
-
-//     if (vec.sz <= space){
-// 		for (int i = 0; i < vec.sz; i++)
-// 			elem[i] = vec.elem[i];
-// 		this->sz = vec.sz;
-// 		return *this;
-//     }
-
-//     // Otherwise, if the sz is larger than the space,
-//     // allocate enough space, and then copy all data from vec
-//     // to the new elem.
-
-//     T *p = new T[vec.sz];
-//     for (int i = 0; i < vec.sz; i++)
-// 		p[i] = vec.elem[i];
-
-//     delete[] elem; // Deallocate old space
-//     elem = p; // assign new pointer
-//     this->sz = this->space = vec.sz; // Set new size
-
-//     return *this; // Return a self-reference.
-// }
 
 // Move constructor
 template<class T, class A> my_vector<T, A>::my_vector(my_vector<T, A> &&vec) noexcept {
