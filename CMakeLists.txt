@@ -5,11 +5,14 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_C_STANDARD 11)
 
 # Bitlevel Programs
-add_executable(DisplayFloatingBits DisplayFloatingBits.c)
 add_executable(Float_to_IEEv1 Float_to_IEEE_Representation.c)
+target_link_libraries(Float_to_IEEv1 m)
+add_executable(Problem2_60 Problem2_60.c)
+add_executable(Problem2_74 Problem2_74.c)
+add_executable(MenuTest Program_06.c)
 
 # STL Implementations
-add_executable(My_Vector Test_MyVector.cc My_Vector.cc)
+add_executable(My_Vector Test_MyVector.cc)
 add_executable(List List.cc)
 
 # C++ Games
