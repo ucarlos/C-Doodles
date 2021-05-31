@@ -39,6 +39,13 @@ add_executable(TestFunction TestFunction.c)
 add_executable(TestEnum Enum.cc)
 add_executable(TestGrade grade.cc)
 
+# TCP Server/Client Test
+add_executable(TCP_Server TCP_Server.cc)
+add_executable(TCP_Client TCP_Client.cc)
+target_link_libraries(TCP_Client boost_system)
+target_link_libraries(TCP_Server boost_system)
+
+
 # Algorithms
 add_executable(Bubble_Sort Bubble_Sort.cc)
 add_executable(Disjoint Disjoint.cc)
