@@ -95,6 +95,9 @@ private:
 	set<Tile_Tuple, Tuple_Comparator> piece_set;
 	bool check_vertical();
 	bool check_horizontal();
+
+	bool check_upper_diagonal();
+	bool check_lower_diagonal();
 	bool check_diagonal();
 };
 
@@ -170,12 +173,13 @@ bool Player::check_horizontal() {
 	return false;
 }
 
+
 /**
- * Check if the player has a diagonal row of 4 of his own pieces.
+ * Check if the player has a upper slope or positive diagonal row of 4 of his
+ * own pieces.
+ * @return A boolean value
  */
-bool Player::check_diagonal() {
-	// Check for positive and negative slopes.	
-	// Positive Slope
+bool Player::check_upper_diagonal() {
 	int x_val;
 	int y_val;
 	
@@ -199,9 +203,20 @@ bool Player::check_diagonal() {
 			else break;
 		}
 	}
-	   
-	// Negative Slope check:
-	diagonal_count = 1;
+
+	return false;
+}
+
+/**
+ * Check if the player has a negative slope or lower diagonal row of 4 of his
+ * own pieces.
+ * @return A boolean value
+ */
+bool Player::check_lower_diagonal() {
+	int x_val{};
+	int y_val{};
+
+	int diagonal_count{};
 	for (auto &tuple : piece_set) {
 		diagonal_count = 1;
 		x_val = std::get<0>(tuple);
@@ -223,6 +238,15 @@ bool Player::check_diagonal() {
 	}
 	
 	return false;
+}
+
+/**
+ * Check if the player has a diagonal row of 4 of his own pieces.
+ */
+bool Player::check_diagonal() {
+	// Check for positive or negative slopes:
+	return check_upper_diagonal() || check_lower_diagonal();
+							  
 }
 
 /**
