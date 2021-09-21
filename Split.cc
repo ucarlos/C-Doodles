@@ -7,6 +7,7 @@
  * -----------------------------------------------------------------------------
  */
 
+#include <cstdlib>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -27,7 +28,6 @@ vector<string> split(const string str, const string delimiter = " ") {
 		throw runtime_error("Error: Cannot have an empty delimiter.");
 	
 	
-	// std::size_t index = 0;
 	// Initially reserve 8 items:
 	vec.reserve(8);
 	
@@ -38,7 +38,7 @@ vector<string> split(const string str, const string delimiter = " ") {
 
 		// Add the string to the vector if the delimiter is not found
 		if (result == string::npos) {
-			vec.push_back(str.substr(index, length - 1));
+			vec.push_back(str.substr(index, length));
 			break;
 		}
 		
@@ -48,11 +48,11 @@ vector<string> split(const string str, const string delimiter = " ") {
 
 	// Reclaim any extra allocated memory:
 	vec.shrink_to_fit();
-	return vec;
-	
+	return vec;	
 }
 
-int main(void) {
+
+void test(void) {
 	// string example = "The quick brown fox jumps over the lazy dog";
 	string example;
 	string delimiter;
@@ -74,4 +74,28 @@ int main(void) {
 		cout << "\'" << i << "\' ";
 	cout << "]\n";
 
+}
+
+int main (int argc, char *argv[]) {	
+	if (argc < 2) {
+		test();
+	}
+	else if (argc == 3) {
+		string source_string = argv[1];
+		string delimiter = argv[2];
+
+
+		vector<string> split_list = split(source_string, delimiter);
+		cout << "Contents of String:\n";
+		cout << "[ ";
+		for (const string &i : split_list)
+			cout << "\'" << i << "\' ";
+		cout << "]\n";
+		
+	}
+	else {		
+		cout << "Usage: \t./Split [Source String] [Delimiter]\n";
+		cout << "You can also call the program with ./Split\n";
+		exit(EXIT_FAILURE);
+	}	
 }
