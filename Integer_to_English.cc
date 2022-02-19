@@ -28,6 +28,7 @@ std::string number_group_to_english(const std::string &str){
 	stringstream ss;
 	uint32_t val;
 	std::string new_str;
+	
 	// convert to integer:	
 	ss.str(str);
 	ss >> val;
@@ -94,11 +95,6 @@ std::string number_group_to_english(const std::string &str){
  * @param val contains an int64_t number to be parsed.
  */
 std::string integer_to_english(const int64_t val){
-	// The program breaks the number into groups of three, and then parses its
-	// value and then adds the appropriate modifier. In order to consider the maximum
-	// value of 2^63 - 1, the modifiers contain Quintilian, quadrillion, trillion,
-	// billion, million, and thousand.
-	// number_group_to_english handles parsing the number from 1 to 999, using maps.
 	if (!val) return "zero";
 
 	std::string str;

@@ -40,11 +40,15 @@ public:
                        
 private:
 	char ch{default_tile_char};
-
+	void clear_screen();
 	bool selected{false}; // Determines if the player has placed a piece there.
 
 };
 
+
+
+unsigned int get_column_size(array <array <Tile, max_columns >, max_rows > &tilem,
+							 int column);
 //------------------------------------------------------------------------------
 // Map 
 //------------------------------------------------------------------------------
@@ -246,7 +250,6 @@ bool Player::check_lower_diagonal() {
 bool Player::check_diagonal() {
 	// Check for positive or negative slopes:
 	return check_upper_diagonal() || check_lower_diagonal();
-							  
 }
 
 /**
@@ -275,14 +278,20 @@ void print_dash_line() {
 // Turn functions
 //------------------------------------------------------------------------------
 
-void player_turn(array<array<Tile, max_columns >, max_rows > &tilem, Player & p) {
-    // Clear screen and print the current board:
+void clear_screen() {
+	// Clear screen and print the current board:
     // Windows Version
 #if defined(WIN32) || defined(_WIN32)
     system("cls");
 #else // Linux/POSIX
     system("clear");
 #endif
+	
+}
+
+void player_turn(array<array<Tile, max_columns >, max_rows > &tilem, Player & p) {
+
+	clear_screen();
 	
 	char pch = p.get_player_token();
 	print_dash_line();
