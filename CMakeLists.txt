@@ -9,7 +9,6 @@ add_executable(Float_to_IEEv1 Float_to_IEEE_Representation.c)
 target_link_libraries(Float_to_IEEv1 m)
 add_executable(Problem2_60 Problem2_60.c)
 add_executable(Problem2_74 Problem2_74.c)
-add_executable(MenuTest Program_06.c)
 
 # STL Implementations
 add_executable(My_Vector Test_MyVector.cc)
@@ -31,13 +30,11 @@ add_executable(Caesar_Cypher Caesar_Cypher.cc)
 #target_link_libraries(Newt newt)
 
 # Test Programs
-add_executable(Test_String stringconcat_test.c)
 add_executable(Word_Count Word_Count.c)
-add_executable(Homework02_06 Homework02_06.cc)
 add_executable(TestDeepCopy TestCopying.cc)
 add_executable(TestFunction TestFunction.c)
 add_executable(TestEnum Enum.cc)
-add_executable(TestGrade grade.cc)
+add_executable(Itoa Itoa.cc)
 
 # TCP Server/Client Test
 add_executable(TCP_Server TCP_Server.cc)
