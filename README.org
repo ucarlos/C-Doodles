@@ -7,7 +7,5 @@ This repository contains minor C and C++ programs. Each program can be compiled 
 The repository contains programs such as
 
 + An Implementation of std::vector
-+ Text-based implementation of Snake
 + Integer_to_English.cc, a program that converts a int64_t number to its english equivalent.
-+ Text-based implementation of Connect Four
 + Text-based implementation of Tic-Tac-Toe
