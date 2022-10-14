@@ -26,18 +26,18 @@ int main(void){
 
 int tsub_ok(int x, int y){
     if (y == INT_MIN) // I think this is a BAD idea when x = INT_MAX
-	    return tadd_ok(x - 1, y + 1);
+        return tadd_ok(x - 1, y + 1);
     else
-	    return tadd_ok(x, -y);
+        return tadd_ok(x, -y);
  
 }
 
 int tadd_ok(int x, int y){
-	int sum = x + y;
-	// Check for Negative overflow:
-	int pos_overflow = (x > 0) && (y > 0) && (sum < 0);
-	int neg_overflow = (x < 0) && (y < 0) && (sum >= 0);
-	
-	return !(pos_overflow || neg_overflow);
+    int sum = x + y;
+    // Check for Negative overflow:
+    int pos_overflow = (x > 0) && (y > 0) && (sum < 0);
+    int neg_overflow = (x < 0) && (y < 0) && (sum >= 0);
+    
+    return !(pos_overflow || neg_overflow);
 
 }

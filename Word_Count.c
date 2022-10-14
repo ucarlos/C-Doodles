@@ -11,7 +11,7 @@ int word_count(char *string){
     for (char *p = string; *p; p++, length++){
         if ((*p) == ' ' || (*p) == '\n')
             wc = (length > 0 && (*(p - 1) != ' '))?
-				wc + 1 : wc;
+                wc + 1 : wc;
     }
 
     return wc;
@@ -26,7 +26,7 @@ int main(void){
     int result = word_count(string);
     printf("Word Count: %d\n", result);
 
-	free(string);
+    free(string);
 
 }
 

@@ -23,43 +23,42 @@ std::string shift_string(const string &s, const int16_t shift){
     char temp;
     
     for (char &i : result){
-	if (!isalpha(i)) continue;
-	
-	temp = tolower(i);
+        if (!isalpha(i)) continue;
+    
+        temp = tolower(i);
 
-	// Optimized (I think) version of code below:
-	// If the shifted character is outside the range ['a' : 'z'],
-	// Then loop around it and decrease/increase the shift
-	// depending on the circumstance
-	adjusted_shift = ((temp + shift) < 'a')
-	    ? ('a' - (temp + shift + 1))
-	    : ((temp + shift) > 'z') ? (temp + shift - 'z' - 1)
-	    : shift;
+        // Optimized (I think) version of code below:
+        // If the shifted character is outside the range ['a' : 'z'],
+        // Then loop around it and decrease/increase the shift
+        // depending on the circumstance
+        adjusted_shift = ((temp + shift) < 'a') ? ('a' - (temp + shift + 1))
+                                            : ((temp + shift) > 'z') ? (temp + shift - 'z' - 1)
+                                                                     : shift;
 
-	temp = (adjusted_shift == shift) ? temp + shift
-	    : ((shift < 0) ? ('z' - adjusted_shift)
-	       : ('a' + adjusted_shift));
+        temp = (adjusted_shift == shift) ? temp + shift
+                                         : ((shift < 0) ? ('z' - adjusted_shift)
+                                                        : ('a' + adjusted_shift));
 
-	// Same logic, but easier to understand:
-	// if (shift < 0){
-	//     adjusted_shift = ((temp + shift) < 'a') ? ('a' - (temp + shift + 1))
-	// 	: shift;
-	    
-	//     temp = (adjusted_shift == shift) ? temp + shift
-	// 	: 'z' - adjusted_shift;
-					       
-	// }
-	// else{
-	//     adjusted_shift = ((temp+ shift) > 'z') ? (temp + shift - 'z' - 1)
-	// 	: shift;
-		
-	//     temp = (adjusted_shift == shift) ? temp + shift
-	// 	: 'a' + adjusted_shift;
-	// }
-	
-	// Now readjust according to case
-	i = (isupper(i)) ? toupper(temp) : temp;
-	
+        // Same logic, but easier to understand:
+        // if (shift < 0){
+        //     adjusted_shift = ((temp + shift) < 'a') ? ('a' - (temp + shift + 1))
+        //  : shift;
+        
+        //     temp = (adjusted_shift == shift) ? temp + shift
+        //  : 'z' - adjusted_shift;
+                           
+        // }
+        // else{
+        //     adjusted_shift = ((temp+ shift) > 'z') ? (temp + shift - 'z' - 1)
+        //  : shift;
+        
+        //     temp = (adjusted_shift == shift) ? temp + shift
+        //  : 'a' + adjusted_shift;
+        // }
+    
+        // Now readjust according to case
+        i = (isupper(i)) ? toupper(temp) : temp;
+    
     }
     
     return result;
@@ -79,11 +78,11 @@ int main(void){
     int32_t absolute = abs(shift);
     
     if (absolute > max_shift){
-	shift = (shift < 0) ? -(absolute % max_shift)
-	    : (absolute % max_shift);
-	
-	cerr << "Warning: Shift is outside range [-26: 26]. Readjusting to "
-	     << shift << endl << endl;
+        shift = (shift < 0) ? -1 * (absolute % max_shift)
+                            : (absolute % max_shift);
+    
+        cerr << "Warning: Shift is outside range [-26: 26]. Readjusting to "
+             << shift << endl << endl;
     }
     
     cout << "Original Phrase: " << input << "\n";

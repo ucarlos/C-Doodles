@@ -39,11 +39,14 @@ int main(void) {
                                 std::make_tuple(50, "Very Strong", "#ffa500") };
 
     for (const auto &item : item_set)
-        cout << "First: " << std::get<0>(item) << "\tSecond: " << std::get<1>(item) << "\tThird: " << std::get<2>(item) << "\n";
+        cout << "First: " << std::get<0>(item)
+             << "\tSecond: " << std::get<1>(item)
+             << "\tThird: " << std::get<2>(item)
+             << "\n";
 
     // Now display score:
     int score;
     cout << "Please enter a score: ";
     cin >> score;
-    dumb_example(item_set, score);    
+    dumb_example(item_set, score);
 }

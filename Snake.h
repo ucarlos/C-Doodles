@@ -24,13 +24,13 @@ const char ch_snake = '@';
 
 class Tile {
 public:
-	Tile() =default;
-	enum Tile_Char get_tile_character() const { return character; }
-	void set_tile_character(const enum Tile_Char t) { character = t; }
-	void clear_tile() { character = Tile_Char::blank; }
+    Tile() =default;
+    enum Tile_Char get_tile_character() const { return character; }
+    void set_tile_character(const enum Tile_Char t) { character = t; }
+    void clear_tile() { character = Tile_Char::blank; }
 private:
-	enum Tile_Char character{Tile_Char::blank};
-	
+    enum Tile_Char character{Tile_Char::blank};
+    
 };
 
 
@@ -38,42 +38,42 @@ enum class Direction { north = 0, south, east, west };
 
 static std::tuple<Direction, std::int32_t>
 create_direction(const Direction dir, const std::int32_t index) {
-	return std::make_tuple(dir, index);
+    return std::make_tuple(dir, index);
 }
 
 class Snake_Node {
 public:
-	Snake_Node() =default;
-	const Tile* node_pointer() { return pointer; }
-	
-	void change_pointer(Tile *new_ptr) {
-		// Clear the tile that is pointed by pointer.
-		if (this->pointer)
-			this->pointer->clear_tile();		   
+    Snake_Node() =default;
+    const Tile* node_pointer() { return pointer; }
+    
+    void change_pointer(Tile *new_ptr) {
+        // Clear the tile that is pointed by pointer.
+        if (this->pointer)
+            this->pointer->clear_tile();           
 
-		// Now set the new pointer and change its tile if it exists.
-		this->pointer = new_ptr;
+        // Now set the new pointer and change its tile if it exists.
+        this->pointer = new_ptr;
 
-		if (new_ptr)
-			this->pointer->set_tile_character(Tile_Char::snake);		
-	}
-	
+        if (new_ptr)
+            this->pointer->set_tile_character(Tile_Char::snake);        
+    }
+    
 private:
-	Tile *pointer{nullptr};
+    Tile *pointer{nullptr};
 };
 
 class Snake {
 private:
-	std::vector<Snake_Node> list{4};
-	std::list<std::tuple<Direction, std::int32_t>> direction_list;
+    std::vector<Snake_Node> list{4};
+    std::list<std::tuple<Direction, std::int32_t>> direction_list;
 
 
 public:
-	Snake() =default;	
-	void clear_direction_list() { direction_list.clear(); }
-	void insert_direction(std::tuple<Direction, std::int32_t> tuple);
-	void remove_front_direction();
-	void remove_back_direction();
+    Snake() =default;   
+    void clear_direction_list() { direction_list.clear(); }
+    void insert_direction(std::tuple<Direction, std::int32_t> tuple);
+    void remove_front_direction();
+    void remove_back_direction();
 };
 
 

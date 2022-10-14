@@ -19,11 +19,12 @@ int main(void){
     
     const uint64_t temp = VAL * sizeof(long double);
     const uint64_t shift = (1 << 20);
-    for (uint64_t i = 1; ; i++){ // Yeah no shit it's a endless loop compiler
-	list = new long double[VAL];
-	unsigned long long ll = i * temp;
-	// long double ld = (ll / powl(2, 20));
-	long double ld = (ll / (long double)(shift));
-	cout << "Allocated " << ll << " bytes (" << ld << " MB)" << endl;
+    for (uint64_t i = 1; ; i++) { // Yeah no shit it's a endless loop compiler
+        list = new long double[VAL];
+        unsigned long long ll = i * temp;
+        // long double ld = (ll / powl(2, 20));
+        long double ld = (ll / (long double)(shift));
+        cout << "Allocated " << ll << " bytes (" << ld << " MB)" << endl;
+    
     }
 }

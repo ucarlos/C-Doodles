@@ -17,29 +17,29 @@
 unsigned int replace_byte(unsigned int x, int i, unsigned char b);
 
 int main(void){
-	unsigned int value = 0x12345678;
-	unsigned char mask = 0xab;
-	int shift;
-	printf("Please enter a Byte location from (0 to %d):",
-	       (int)sizeof(unsigned) - 1 );
-	scanf("%d", &shift);
-	
-	printf("Original Value: 0x%x\n", value);
-	printf("Mask Value: 0x%x\n", mask);
-	printf("After Replacing Byte %d with Mask: 0x%x\n", shift,
-	       replace_byte(value, shift, mask));
+    unsigned int value = 0x12345678;
+    unsigned char mask = 0xab;
+    int shift;
+    printf("Please enter a Byte location from (0 to %d):",
+           (int)sizeof(unsigned) - 1 );
+    scanf("%d", &shift);
+    
+    printf("Original Value: 0x%x\n", value);
+    printf("Mask Value: 0x%x\n", mask);
+    printf("After Replacing Byte %d with Mask: 0x%x\n", shift,
+           replace_byte(value, shift, mask));
 
-	return 0;
+    return 0;
 
 }
 
 unsigned int replace_byte(unsigned int x, int i, unsigned char b){
-	if ((i < 0) || (i >= sizeof(unsigned int))){
-			printf("Byte location cannot be negative or exceed"
-			       "%d bytes\n", (int)(sizeof(unsigned int) - 1));
-			       
-			exit(EXIT_FAILURE);
-	}
+    if ((i < 0) || (i >= sizeof(unsigned int))){
+        printf("Byte location cannot be negative or exceed"
+               "%d bytes\n", (int)(sizeof(unsigned int) - 1));
+                   
+        exit(EXIT_FAILURE);
+    }
 
 /*
  * First, make a copy of the variable x (Or use it)
@@ -49,14 +49,14 @@ unsigned int replace_byte(unsigned int x, int i, unsigned char b){
  *        and to ignore the other bits
  * Lastly, Do a BITWISE OR on the result.
  *
- */	
-	unsigned int copy = x;
-	unsigned int shift = (0U | (unsigned) b) << (8 * i);
-	//copy &= (~((0U | 0xff) << 8 * i));
-	//copy |= shift;
+ */ 
+    unsigned int copy = x;
+    unsigned int shift = (0U | (unsigned) b) << (8 * i);
+    //copy &= (~((0U | 0xff) << 8 * i));
+    //copy |= shift;
 
-	copy = ((copy & ~MOVE_BITS(0xff, i)) | MOVE_BITS(b, i)); // In one line
-	return copy;
-	
+    copy = ((copy & ~MOVE_BITS(0xff, i)) | MOVE_BITS(b, i)); // In one line
+    return copy;
+    
 
 }
