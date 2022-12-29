@@ -7,19 +7,15 @@
  * -------------------------------------------------------------------------------
  */
 
-#include <cstdlib>
-#include <unistd.h>
 #include <iostream>
 #include <string>
 #include <regex>
+#include <unistd.h>
 #include <vector>
 using namespace std;
 
 enum class mode { NORMAL = 0, DEBUG_MODE, INTERACTIVE_MODE, TEST_MODE };
-
 const mode MODE = mode::NORMAL;
-
-
 
 vector<string> get_all_regex_matches(string regex_pattern, string searched_string) {
     vector<string> search_vector;
@@ -107,6 +103,7 @@ void help() {
 
 int main(int argc, char *argv[]) {
 
+    
     if (MODE == mode::DEBUG_MODE)
         cout << "Argument count: " << argc << endl;
 
@@ -126,11 +123,14 @@ int main(int argc, char *argv[]) {
     string regex_pattern;
     string searched_string;
 
-    while ((option = getopt(argc, argv, "r:")) != -1) {
+    while ((option = getopt(argc, argv, "r:i")) != -1) {
         switch(option) {
         case 'r':
             regex_pattern = string{optarg};
             break;
+        case 'i':
+            interactive_mode();
+            exit(EXIT_SUCCESS);            
         default:
             help();
             exit(EXIT_SUCCESS);
@@ -152,7 +152,12 @@ int main(int argc, char *argv[]) {
         cout << "No matches were found for " << searched_string << "using that regex pattern.\n";
     }
     else {
-        cout << result.size() << " match(es) were found: \n";
+        size_t count = result.size();        
+        if (count < 2)
+            cout << "1 match was found: \n";
+        else
+            cout << count << " matches were found: \n";
+        
         for (const auto &string : result)
             cout << string << "\n";
     }
