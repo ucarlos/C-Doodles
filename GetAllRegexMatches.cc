@@ -17,6 +17,17 @@ using namespace std;
 enum class mode { NORMAL = 0, DEBUG_MODE, INTERACTIVE_MODE, TEST_MODE };
 const mode MODE = mode::NORMAL;
 
+
+/**
+ * Given a regex pattern and a string to apply the pattern to, return a vector
+ * containing all regex matches found.
+ *
+ * @param regex_pattern String containing the regex pattern to use.
+ * @param searched_string String that the regex pattern is applied on.
+ *
+ * @returns A vector containing all regex matches found.  If either the regex pattern or
+ *          string is empty, or if the regex pattern is invalid, an empty vector is returned.  
+ */   
 vector<string> get_all_regex_matches(string regex_pattern, string searched_string) {
     vector<string> search_vector;
     
