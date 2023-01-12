@@ -15,7 +15,7 @@ add_executable(My_Vector Test_MyVector.cc)
 add_executable(List List.cc)
 
 # C++ Games
-add_executable(Connect_Four Connect_Four.cc)
+#add_executable(Connect_Four Connect_Four.cc)
 add_executable(Tic_Tak_Toe TicTacToe.cc)
 add_executable(Snake Snake.cc)
 
@@ -35,12 +35,13 @@ add_executable(TestDeepCopy TestCopying.cc)
 add_executable(TestFunction TestFunction.c)
 add_executable(TestEnum Enum.cc)
 add_executable(Itoa Itoa.cc)
+add_executable(Encoding_Test Encoding_Test.cc)
 
 # TCP Server/Client Test
-add_executable(TCP_Server TCP_Server.cc)
-add_executable(TCP_Client TCP_Client.cc)
-target_link_libraries(TCP_Client boost_system)
-target_link_libraries(TCP_Server boost_system)
+#add_executable(TCP_Server TCP_Server.cc)
+#add_executable(TCP_Client TCP_Client.cc)
+#target_link_libraries(TCP_Client boost_system)
+#target_link_libraries(TCP_Server boost_system)
 
 
 # Algorithms
