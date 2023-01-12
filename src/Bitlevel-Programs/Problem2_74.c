@@ -1,4 +1,4 @@
-#include "./common_header.h"
+#include "../common_header.h"
 /*
  * Write a function with the following prototype:
  */

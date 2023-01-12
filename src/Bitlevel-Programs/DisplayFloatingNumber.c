@@ -3,7 +3,7 @@
 //
 
 
-#include "./common_header.h"
+#include "../common_header.h"
 #include <math.h>
 #include <stdbool.h>
 // Defintions

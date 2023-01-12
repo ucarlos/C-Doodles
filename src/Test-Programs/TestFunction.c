@@ -1,7 +1,7 @@
 //
 // Created by ulysses on 3/12/19.
 //
-#include "./common_header.h"
+#include "../common_header.h"
 
 
 #include <math.h>

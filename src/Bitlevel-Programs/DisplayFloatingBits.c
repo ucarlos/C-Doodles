@@ -2,7 +2,7 @@
 // Created by ulysses on 3/9/19.
 //
 
-#include "./common_header.h"
+#include "../common_header.h"
 #define FLOAT_BIAS (127)
 #define FLOAT_SIZE (32)
 

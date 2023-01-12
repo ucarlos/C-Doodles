@@ -1,4 +1,4 @@
-#include "./common_header.h"
+#include "../common_header.h"
 /*
  * Suppose we number the bytes in a w-bit word from 0(Least significant) to
  * w/8 - 1 (Most significant). Write code for the following C function, which 

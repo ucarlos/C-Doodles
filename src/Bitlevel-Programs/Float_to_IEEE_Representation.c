@@ -2,7 +2,7 @@
 // Created by ulysses on 3/13/19.
 //
 
-#include "./common_header.h"
+#include "../common_header.h"
 #include <math.h>
 #include <stdbool.h>
 // Defintions
