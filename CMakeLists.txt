@@ -4,7 +4,6 @@ project(Doodles)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_C_STANDARD 11)
 
-<<<<<<< HEAD
 # Bitlevel Programs
 add_executable(Float_to_IEEv1 src/Bitlevel-Programs/Float_to_IEEE_Representation.c)
 target_link_libraries(Float_to_IEEv1 m)
@@ -38,17 +37,11 @@ add_executable(TestEnum src/Test-Programs/Enum.cc)
 add_executable(Itoa src/Test-Programs/Itoa.cc)
 add_executable(Encoding_Test src/Test-Programs/Encoding_Test.cc)
 
-# TCP Server/Client Test
-#add_executable(TCP_Server TCP_Server.cc)
-#add_executable(TCP_Client TCP_Client.cc)
-#target_link_libraries(TCP_Client boost_system)
-#target_link_libraries(TCP_Server boost_system)
-
-
 # Algorithms
 add_executable(Bubble_Sort src/Algorithms/Bubble_Sort.cc)
 add_executable(Disjoint src/Algorithms/Disjoint.cc)
-=======
-add_executable(Japanese_Regex_Test Japanese_Regex_Test.cc)
-add_executable(GetAllRegexMatches GetAllRegexMatches.cc)
->>>>>>> Regex/master
+
+# Regex Programs
+add_executable(Japanese_Regex_Test src/Regex/Japanese_Regex_Test.cc)
+add_executable(GetAllRegexMatches src/Regex/GetAllRegexMatches.cc)
+
