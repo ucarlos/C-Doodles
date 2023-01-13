@@ -93,7 +93,7 @@ void debug_mode() {
     std::regex pattern{japanese_pattern};
 
     std::smatch string_match;
-    const string test = "普段は生意気ExampleだけどクリスマスにHelloWorld夜這いする妹";
+    const string test = "それは何も持っていませんExample1あなたが正しいExample2なんて混乱";
     
     bool result = regex_search(test, string_match, pattern);
     
