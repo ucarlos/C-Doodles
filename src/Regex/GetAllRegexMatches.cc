@@ -3,7 +3,8 @@
  * Created by Ulysses Carlos on 12/28/2022 at 03:08 PM
  *
  * GetAllRegexMatches.cc
- *
+ * An interactive program to retreive all matches of a regex pattern in a given
+ * source file. 
  * -------------------------------------------------------------------------------
  */
 
@@ -43,16 +44,16 @@ vector<string> get_all_regex_matches(string regex_pattern, string searched_strin
     catch (regex_error &error) {
         return search_vector;
     }
-
+	
     auto first = searched_string.begin();
-    auto end = searched_string.end();
+    auto last = searched_string.end();
 
     std::match_results<std::string::iterator> string_match;
         
-    while (first < end) {
+    while (first < last) {
         // string substring = searched_string.substr((first - searched_string.begin()), searched_string.length() - 1);
 
-        bool result = regex_search(first, end, string_match, regex);
+        bool result = regex_search(first, last, string_match, regex);
         if (!result)
             break;
 
@@ -113,8 +114,6 @@ void help() {
 
 
 int main(int argc, char *argv[]) {
-
-    
     if (MODE == mode::DEBUG_MODE)
         cout << "Argument count: " << argc << endl;
 
@@ -135,7 +134,7 @@ int main(int argc, char *argv[]) {
     string searched_string;
 
     while ((option = getopt(argc, argv, "r:i")) != -1) {
-        switch(option) {
+        switch (option) {
         case 'r':
             regex_pattern = string{optarg};
             break;
@@ -174,4 +173,3 @@ int main(int argc, char *argv[]) {
     }
     
 }
-    

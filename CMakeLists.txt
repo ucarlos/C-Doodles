@@ -1,3 +1,4 @@
+
 cmake_minimum_required(VERSION 3.14)
 project(Doodles)
 
@@ -44,4 +45,5 @@ add_executable(Disjoint src/Algorithms/Disjoint.cc)
 # Regex Programs
 add_executable(Japanese_Regex_Test src/Regex/Japanese_Regex_Test.cc)
 add_executable(GetAllRegexMatches src/Regex/GetAllRegexMatches.cc)
+add_executable(Databases main.cpp)
 
