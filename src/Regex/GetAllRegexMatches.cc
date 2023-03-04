@@ -28,7 +28,7 @@ const mode MODE = mode::NORMAL;
  *
  * @returns A vector containing all regex matches found.  If either the regex pattern or
  *          string is empty, or if the regex pattern is invalid, an empty vector is returned.  
- */   
+ */
 vector<string> get_all_regex_matches(string regex_pattern, string searched_string) {
     vector<string> search_vector;
     
@@ -49,18 +49,14 @@ vector<string> get_all_regex_matches(string regex_pattern, string searched_strin
     auto last = searched_string.end();
 
     std::match_results<std::string::iterator> string_match;
-        
+	
     while (first < last) {
-        // string substring = searched_string.substr((first - searched_string.begin()), searched_string.length() - 1);
-
         bool result = regex_search(first, last, string_match, regex);
         if (!result)
             break;
-
+		
         // Insert the match into the vector, and clear the string match.
         search_vector.push_back(string_match.str());
-        // auto length = string_match.length();
-        // auto match = string_match.str();
         first = string_match.suffix().first;
     }
 
@@ -170,6 +166,5 @@ int main(int argc, char *argv[]) {
         
         for (const auto &string : result)
             cout << string << "\n";
-    }
-    
+    }    
 }
