@@ -37,6 +37,9 @@ add_executable(TestFunction src/Test-Programs/TestFunction.c)
 add_executable(TestEnum src/Test-Programs/Enum.cc)
 add_executable(Itoa src/Test-Programs/Itoa.cc)
 add_executable(Encoding_Test src/Test-Programs/Encoding_Test.cc)
+add_executable(DequeTest src/Test-Programs/DequeTest.cc)
+add_executable(BitChecker src/Test-Programs/BitChecker.cc)
+
 
 # Algorithms
 add_executable(Bubble_Sort src/Algorithms/Bubble_Sort.cc)
@@ -52,4 +55,4 @@ add_executable(ConnectionTest src/Database/ConnectionTest.cc)
 
 
 # Multithreading Programs
-add_executable(ExampleThread src/Database/ExampleThread.cc)
+add_executable(ExampleThread src/Multithreading/ExampleThread.cc)

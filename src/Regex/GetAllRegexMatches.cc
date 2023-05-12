@@ -26,8 +26,8 @@ const mode MODE = mode::NORMAL;
  * @param regex_pattern String containing the regex pattern to use.
  * @param searched_string String that the regex pattern is applied on.
  *
- * @returns A vector containing all regex matches found.  If either the regex pattern or
- *          string is empty, or if the regex pattern is invalid, an empty vector is returned.  
+ * @returns A vector containing all regex matches found. If either the regex pattern or
+ *          string is empty, or if the regex pattern is invalid, an empty vector is returned.
  */
 vector<string> get_all_regex_matches(string regex_pattern, string searched_string) {
     vector<string> search_vector;
@@ -77,7 +77,12 @@ void interactive_mode() {
         cout << "No matches were found in " << search_string << " using the regex pattern.\n";
     }
     else {
-        cout << match_vector.size() << "match(es) were found:\n";
+		size_t matches = match_vector.size();		
+		if (matches == 1)
+			cout << matches << " match was found:\n";
+		else
+			cout << matches << " matches were found:\n";
+
         for (const string &sub_match: match_vector)
             cout << "\t" << sub_match << "\n";
     }
@@ -105,7 +110,8 @@ void debug_mode() {
 }
 
 void help() {
-    cout << "Usage: ./GetAllRegexMatches.cc -r [Regex Pattern] [String]" << endl;   
+    cout << "Usage: ./GetAllRegexMatches.cc -r [Regex Pattern] [String]" << endl;
+	cout << "                               -i\n";
 }
 
 
@@ -118,9 +124,8 @@ int main(int argc, char *argv[]) {
         debug_mode();
         exit(EXIT_SUCCESS);
     }
-
     
-    if (argc != 4) {
+    if (!(argc == 2 || argc == 4)) {
         help();
         exit(EXIT_SUCCESS);
     }
@@ -141,7 +146,6 @@ int main(int argc, char *argv[]) {
             help();
             exit(EXIT_SUCCESS);
         }
-        
     }
 
     if (optind > argc) {
@@ -158,7 +162,7 @@ int main(int argc, char *argv[]) {
         cout << "No matches were found for " << searched_string << "using that regex pattern.\n";
     }
     else {
-        size_t count = result.size();        
+        size_t count = result.size();
         if (count < 2)
             cout << "1 match was found: \n";
         else
