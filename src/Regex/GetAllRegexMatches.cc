@@ -29,7 +29,7 @@ const mode MODE = mode::NORMAL;
  * @returns A vector containing all regex matches found. If either the regex pattern or
  *          string is empty, or if the regex pattern is invalid, an empty vector is returned.
  */
-vector<string> get_all_regex_matches(string regex_pattern, string searched_string) {
+vector<string> get_all_regex_matches(const string regex_pattern, const string searched_string) {
     vector<string> search_vector;
     
     if (regex_pattern.empty() || searched_string.empty())
@@ -48,7 +48,7 @@ vector<string> get_all_regex_matches(string regex_pattern, string searched_strin
     auto first = searched_string.begin();
     auto last = searched_string.end();
 
-    std::match_results<std::string::iterator> string_match;
+    std::match_results<std::string::const_iterator> string_match;
 	
     while (first < last) {
         bool result = regex_search(first, last, string_match, regex);
@@ -65,11 +65,14 @@ vector<string> get_all_regex_matches(string regex_pattern, string searched_strin
 
 
 void interactive_mode() {
+	// Note to self: If you ever mix cin and getline, you'll end up with some whitespace
+	// characters that have to be consumed. You can do that by doing cin.get().
+
     string pattern_string, search_string;
     cout << "Please enter the regex pattern to use: ";
-    cin >> pattern_string;
+    getline(cin, pattern_string);
     cout << "Now enter the string to search for the regex pattern: ";
-    cin >> search_string;
+    getline(cin, search_string);
     
 
     vector<string> match_vector = get_all_regex_matches(pattern_string, search_string);
@@ -86,7 +89,6 @@ void interactive_mode() {
         for (const string &sub_match: match_vector)
             cout << "\t" << sub_match << "\n";
     }
-    
 
 }
 
@@ -141,7 +143,7 @@ int main(int argc, char *argv[]) {
             break;
         case 'i':
             interactive_mode();
-            exit(EXIT_SUCCESS);            
+            exit(EXIT_SUCCESS);
         default:
             help();
             exit(EXIT_SUCCESS);
@@ -170,5 +172,5 @@ int main(int argc, char *argv[]) {
         
         for (const auto &string : result)
             cout << string << "\n";
-    }    
+    }
 }
