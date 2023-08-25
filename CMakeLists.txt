@@ -40,6 +40,8 @@ add_executable(Encoding_Test src/Test-Programs/Encoding_Test.cc)
 add_executable(DequeTest src/Test-Programs/DequeTest.cc)
 add_executable(BitChecker src/Test-Programs/BitChecker.cc)
 
+add_executable(TestLogger src/Test-Programs/TestLogger.cc)
+target_link_libraries(TestLogger fmt)
 
 # Algorithms
 add_executable(Bubble_Sort src/Algorithms/Bubble_Sort.cc)
@@ -48,7 +50,7 @@ add_executable(Disjoint src/Algorithms/Disjoint.cc)
 # Regex Programs
 add_executable(Japanese_Regex_Test src/Regex/Japanese_Regex_Test.cc)
 add_executable(GetAllRegexMatches src/Regex/GetAllRegexMatches.cc)
-
+target_link_libraries(GetAllRegexMatches fmt)
 
 # Database Programs
 add_executable(ConnectionTest src/Database/ConnectionTest.cc)

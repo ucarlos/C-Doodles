@@ -4,7 +4,9 @@
  *
  * GetAllRegexMatches.cc
  * An interactive program to retreive all matches of a regex pattern in a given
- * source file. 
+ * source file.
+ *
+ * NOTE: If using g++, compile with -lfmt to get spdlog to work.
  * -------------------------------------------------------------------------------
  */
 
@@ -12,12 +14,15 @@
 #include <string>
 #include <regex>
 #include <unistd.h>
+#include "../Logger.hpp"
 #include <vector>
+
 using namespace std;
 
-enum class mode { NORMAL = 0, DEBUG_MODE, INTERACTIVE_MODE, TEST_MODE };
-const mode MODE = mode::NORMAL;
+enum class mode { NORMAL = 0, DEBUG_MODE };
+const mode MODE = mode::DEBUG_MODE;
 
+Logger logger{};
 
 /**
  * Given a regex pattern and a string to apply the pattern to, return a vector
@@ -32,8 +37,10 @@ const mode MODE = mode::NORMAL;
 vector<string> get_all_regex_matches(const string regex_pattern, const string searched_string) {
     vector<string> search_vector;
     
-    if (regex_pattern.empty() || searched_string.empty())
+    if (regex_pattern.empty() || searched_string.empty()) {
+        logger.debug("get_all_regex_matches(): Regex Pattern or Search String is empty.");
         return search_vector;
+    }
         
     std::regex regex;
 
@@ -42,6 +49,7 @@ vector<string> get_all_regex_matches(const string regex_pattern, const string se
         regex = std::regex{regex_pattern};
     }
     catch (regex_error &error) {
+        logger.error("get_all_regex_matches(): " + regex_pattern + " is an invalid regex pattern.");
         return search_vector;
     }
 	
@@ -56,6 +64,7 @@ vector<string> get_all_regex_matches(const string regex_pattern, const string se
             break;
 		
         // Insert the match into the vector, and clear the string match.
+        logger.debug("get_all_regex_matches(): Appending " + string_match.str());
         search_vector.push_back(string_match.str());
         first = string_match.suffix().first;
     }
@@ -92,25 +101,6 @@ void interactive_mode() {
 
 }
 
-void debug_mode() {
-    const string japanese_pattern = R"([一-龠]+|[ぁ-ゔ]+|[ァ-ヴー]+|[々〆〤ヶ]+)";
-    std::regex pattern{japanese_pattern};
-
-    std::smatch string_match;
-    const string test = "それは何も持っていませんExample1あなたが正しいExample2なんて混乱";
-    
-    bool result = regex_search(test, string_match, pattern);
-    
-    cout << "Match size: " << string_match.size() << "\n"
-         << "Match: " << string_match.str() << "\n";
-
-
-    vector<string> check = get_all_regex_matches(japanese_pattern, test);
-    cout << "List of checks:\n";
-    for (const string &str: check)
-        cout << str << "\n";
-}
-
 void help() {
     cout << "Usage: ./GetAllRegexMatches.cc -r [Regex Pattern] [String]" << endl;
 	cout << "                               -i\n";
@@ -119,14 +109,12 @@ void help() {
 
 int main(int argc, char *argv[]) {
     if (MODE == mode::DEBUG_MODE)
-        cout << "Argument count: " << argc << endl;
+        logger.logger().set_level(spdlog::level::debug);
+    else
+        logger.logger().set_level(spdlog::level::off);
 
-    
-    if (MODE == mode::TEST_MODE) {
-        debug_mode();
-        exit(EXIT_SUCCESS);
-    }
-    
+
+
     if (!(argc == 2 || argc == 4)) {
         help();
         exit(EXIT_SUCCESS);

@@ -83,7 +83,7 @@ private:
         spdlog::level::level_enum current_level = this->_logger.level();
         return allowed_level.at(required_level).find(current_level) != allowed_level.at(required_level).end();
     }
-
 };
+
 
 #endif
