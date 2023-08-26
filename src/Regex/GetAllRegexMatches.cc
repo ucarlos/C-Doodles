@@ -21,7 +21,6 @@ using namespace std;
 
 enum class mode { NORMAL = 0, DEBUG_MODE };
 const mode MODE = mode::DEBUG_MODE;
-
 Logger logger{};
 
 /**
