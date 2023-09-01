@@ -51,17 +51,17 @@ vector<string> get_all_regex_matches(const string regex_pattern, const string se
         logger.error("get_all_regex_matches(): " + regex_pattern + " is an invalid regex pattern.");
         return search_vector;
     }
-	
+    
     auto first = searched_string.begin();
     auto last = searched_string.end();
 
     std::match_results<std::string::const_iterator> string_match;
-	
+    
     while (first < last) {
         bool result = regex_search(first, last, string_match, regex);
         if (!result)
             break;
-		
+        
         // Insert the match into the vector, and clear the string match.
         logger.debug("get_all_regex_matches(): Appending " + string_match.str());
         search_vector.push_back(string_match.str());
@@ -73,8 +73,8 @@ vector<string> get_all_regex_matches(const string regex_pattern, const string se
 
 
 void interactive_mode() {
-	// Note to self: If you ever mix cin and getline, you'll end up with some whitespace
-	// characters that have to be consumed. You can do that by doing cin.get().
+    // Note to self: If you ever mix cin and getline, you'll end up with some whitespace
+    // characters that have to be consumed. You can do that by doing cin.get().
 
     string pattern_string, search_string;
     cout << "Please enter the regex pattern to use: ";
@@ -88,11 +88,11 @@ void interactive_mode() {
         cout << "No matches were found in " << search_string << " using the regex pattern.\n";
     }
     else {
-		size_t matches = match_vector.size();		
-		if (matches == 1)
-			cout << matches << " match was found:\n";
-		else
-			cout << matches << " matches were found:\n";
+        size_t matches = match_vector.size();
+        if (matches == 1)
+            cout << matches << " match was found:\n";
+        else
+            cout << matches << " matches were found:\n";
 
         for (const string &sub_match: match_vector)
             cout << "\t" << sub_match << "\n";
@@ -102,7 +102,7 @@ void interactive_mode() {
 
 void help() {
     cout << "Usage: ./GetAllRegexMatches.cc -r [Regex Pattern] [String]" << endl;
-	cout << "                               -i\n";
+    cout << "                               -i\n";
 }
 
 
