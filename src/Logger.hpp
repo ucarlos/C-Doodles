@@ -11,6 +11,7 @@
 #ifndef LOGGER_H
 #define LOGGER_H
 
+#pragma once
 #include <spdlog/spdlog.h>
 #include <spdlog/details/log_msg.h>
 #include <spdlog/sinks/ansicolor_sink.h>
@@ -22,8 +23,8 @@ class Logger {
 public:
     Logger() = default;
     explicit Logger(const std::string &logger_name) : _logger_name{logger_name} { }
-
     spdlog::sinks::ansicolor_stderr_sink<spdlog::details::console_mutex>& logger() const { return *_logger; }
+
     void debug(const std::string &message) {
         if (!log_level_is_at_least(spdlog::level::debug))
             return;
