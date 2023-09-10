@@ -113,7 +113,6 @@ int main(int argc, char *argv[]) {
         logger.logger().set_level(spdlog::level::off);
 
 
-
     if (!(argc == 2 || argc == 4)) {
         help();
         exit(EXIT_SUCCESS);
