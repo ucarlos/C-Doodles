@@ -33,7 +33,7 @@ Logger logger{};
  * @returns A vector containing all regex matches found. If either the regex pattern or
  *          string is empty, or if the regex pattern is invalid, an empty vector is returned.
  */
-vector<string> get_all_regex_matches(const string regex_pattern, const string searched_string) {
+vector<string> get_all_regex_matches(const string &regex_pattern, const string &searched_string) {
     vector<string> search_vector;
     
     if (regex_pattern.empty() || searched_string.empty()) {
@@ -155,7 +155,6 @@ int main(int argc, char *argv[]) {
             cout << "1 match was found: \n";
         else
             cout << count << " matches were found: \n";
-        
         for (const auto &string : result)
             cout << string << "\n";
     }

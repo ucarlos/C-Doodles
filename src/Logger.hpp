@@ -30,7 +30,7 @@ public:
             return;
 
         this->_log_message = spdlog::details::log_msg{this->_logger_name, spdlog::level::debug, message};
-        _logger->log(_log_message);
+        this->_logger->log(_log_message);
     }
 
     void info(const std::string &message) {
