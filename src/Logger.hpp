@@ -18,11 +18,12 @@
 #include <memory>
 #include <unordered_map>
 #include <unordered_set>
+#include <utility>
 
 class Logger {
 public:
     Logger() = default;
-    explicit Logger(const std::string &logger_name) : _logger_name{logger_name} { }
+    explicit Logger(std::string logger_name) : _logger_name{std::move(logger_name)} { }
     spdlog::sinks::ansicolor_stderr_sink<spdlog::details::console_mutex>& logger() const { return *_logger; }
 
     void debug(const std::string &message) {
@@ -74,7 +75,7 @@ private:
     std::unique_ptr<spdlog::sinks::ansicolor_stderr_sink_mt> _logger{ new spdlog::sinks::ansicolor_stderr_sink_mt{} };
         
     bool log_level_is_at_least(const spdlog::level::level_enum required_level) {
-        // This is done because the log levels aren't in sequential order (ie. I can't do log_level < debug)
+        // This is done because the log levels aren't in sequential order (i.e. I can't do log_level < debug)
         // the enum isn't ordered by intensity current_level; I know it's disgusting.
         const static std::unordered_map<spdlog::level::level_enum, std::unordered_set<spdlog::level::level_enum>> allowed_log_level_map = {
             {spdlog::level::info, {spdlog::level::info, spdlog::level::debug, spdlog::level::warn, spdlog::level::err, spdlog::level::critical}},

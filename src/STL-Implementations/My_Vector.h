@@ -3,7 +3,7 @@
  * Created by Ulysses Carlos on 08/16/2020 at 08:05 PM
  * 
  * My_Vector.h
- * Implmenetation of vector, following the implementation from Bjarne
+ * Implementation of vector, following the implementation from Bjarne
  * Stroustrup's "Programming: Principles and Practice Using C++"
  * 
  * -----------------------------------------------------------------------------

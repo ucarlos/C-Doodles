@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.14)
 project(Doodles)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_C_STANDARD 11)
 
 # Bitlevel Programs
@@ -12,11 +12,13 @@ add_executable(Problem2_60 src/Bitlevel-Programs/Problem2_60.c)
 add_executable(Problem2_74 src/Bitlevel-Programs/Problem2_74.c)
 
 # STL Implementations
+# Since parts of std::allocator was removed in C++-20, Compile Test_MyVector.cc using C++-17.
 add_executable(My_Vector src/STL-Implementations/Test_MyVector.cc)
+set_property(TARGET My_Vector PROPERTY CXX_STANDARD 17)
+
 add_executable(List src/STL-Implementations/List.cc)
 
 # C++ Games
-#add_executable(Connect_Four Connect_Four.cc)
 add_executable(Tic_Tak_Toe src/Games/TicTacToe.cc)
 add_executable(Snake src/Games/Snake.cc)
 
@@ -25,10 +27,6 @@ add_executable(Integer_to_English src/Standalone/Integer_to_English.cc)
 add_executable(Check_Digits src/Standalone/Check_Strings_For_Digits.c)
 add_executable(Mark_Example src/Standalone/Mark_Example.cc)
 add_executable(Caesar_Cypher src/Standalone/Caesar_Cypher.cc)
-
-# Requires Linking: Commented out for Windows
-#add_executable(Newt Newt.cpp)
-#target_link_libraries(Newt newt)
 
 # Test Programs
 add_executable(Word_Count src/Test-Programs/Word_Count.c)
@@ -54,7 +52,7 @@ target_link_libraries(GetAllRegexMatches fmt)
 
 # Database Programs
 add_executable(ConnectionTest src/Database/ConnectionTest.cc)
-
+target_link_libraries(ConnectionTest pq pqxx)
 
 # Multithreading Programs
 add_executable(ExampleThread src/Multithreading/ExampleThread.cc)

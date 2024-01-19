@@ -3,7 +3,7 @@
  * Created by Ulysses Carlos on 08/23/2023 at 10:36 PM
  *
  * FileLogger.hpp
- * Simple Filelogger class.
+ * Simple File logger class.
  * ------------------------------------------------------------------------------
  */
 

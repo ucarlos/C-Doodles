@@ -3,7 +3,7 @@
  * Created by Ulysses Carlos on 12/28/2022 at 03:08 PM
  *
  * GetAllRegexMatches.cc
- * An interactive program to retreive all matches of a regex pattern in a given
+ * An interactive program to retrieve all matches of a regex pattern in a given
  * source file.
  *
  * NOTE: If using g++, compile with -lfmt to get spdlog to work.
@@ -41,9 +41,9 @@ vector<string> get_all_regex_matches(const string &regex_pattern, const string &
         return search_vector;
     }
         
-    std::regex regex;
+    std::regex regex{};
 
-    // If there's a problem with the regex, return an empty vector.
+    // if there's a problem with the regex, return an empty vector.
     try {
         regex = std::regex{regex_pattern};
     }
@@ -62,8 +62,8 @@ vector<string> get_all_regex_matches(const string &regex_pattern, const string &
         if (!result)
             break;
         
-        // Insert the match into the vector, and clear the string match.
-        logger.debug("get_all_regex_matches(): Appending " + string_match.str());
+        // insert the match into the vector, and clear the string match.
+        logger.debug("get_all_regex_matches(): appending " + string_match.str());
         search_vector.push_back(string_match.str());
         first = string_match.suffix().first;
     }

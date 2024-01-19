@@ -3,13 +3,12 @@
  * Created by Ulysses Carlos on 06/21/2020 at 02:33 PM
  * 
  * Cesear_Cypher.cc
- * An example of an Caesar cypher to work with.
+ * An example of a Caesar cypher to work with.
  * -----------------------------------------------------------------------------
  */
 
 #include <iostream>
 #include <string>
-#include <cstdint>
 #include <cctype>
 #include <cmath>
 using namespace std;
