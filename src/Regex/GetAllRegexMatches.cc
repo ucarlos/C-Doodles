@@ -71,7 +71,6 @@ vector<string> get_all_regex_matches(const string &regex_pattern, const string &
     return search_vector;
 }
 
-
 void interactive_mode() {
     // Note to self: If you ever mix cin and getline, you'll end up with some whitespace
     // characters that have to be consumed. You can do that by doing cin.get().
@@ -104,7 +103,6 @@ void help() {
     cout << "Usage: ./GetAllRegexMatches.cc -r [Regex Pattern] [String]" << endl;
     cout << "                               -i\n";
 }
-
 
 int main(int argc, char *argv[]) {
     if (MODE == mode::DEBUG_MODE)
