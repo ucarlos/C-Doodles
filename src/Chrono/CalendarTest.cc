@@ -1,10 +1,10 @@
 /*
- * ------------------------------------------------------------------------------
+ * -----------------------------------------------------------------------------
  * Created by Ulysses Carlos on 01/18/2024 at 08:50 PM
  *
  * CalendarTest.cc
  *
- * ------------------------------------------------------------------------------
+ * -----------------------------------------------------------------------------
  */
 
 #include <ctime>
@@ -22,7 +22,6 @@ bool is_leap_year(int64_t year) {
     else
         return !(year % 4);
 }
-
 
 bool verify_date_string(int64_t year,
                         uint32_t month,
@@ -49,16 +48,16 @@ bool verify_date_string(int64_t year,
         return (1 <= day && day <= normal_year_month_day_list[month - 1]);
 }
 
-
 std::chrono::time_point<std::chrono::system_clock> generate_date_object(int64_t year,
                                                                         uint32_t month,
                                                                         uint32_t day,
                                                                         uint32_t hour = 0,
                                                                         uint32_t minute = 0,
                                                                         uint32_t second = 0) {
-    std::chrono::time_point<std::chrono::system_clock> date_object{};
-    if (!verify_date_string(year, month, day))
-        return date_object;
+    if (!verify_date_string(year, month, day)) {
+		// Return a default time_point object instead of null or an exception
+        return std::chrono::time_point<std::chrono::system_clock> {};
+	}
 
     stringstream format_stringstream;
     format_stringstream << year << "-" << month << "-" << day << " " << hour << ":" << minute << ":" << second;
@@ -69,23 +68,19 @@ std::chrono::time_point<std::chrono::system_clock> generate_date_object(int64_t 
     
 }
 
-
-
 int main() {
     std::chrono::time_point<std::chrono::system_clock> current_time_point = std::chrono::system_clock::now();
     
     std::time_t start_time = std::chrono::system_clock::to_time_t(current_time_point);
-    cout << "[BEFORE] System Time " << std::ctime(&start_time) << "\n";
+    cout << "[BEFORE] System Time " << std::ctime(&start_time);
 
     current_time_point += std::chrono::hours(12);
     start_time = std::chrono::system_clock::to_time_t(current_time_point);
     // Now incrementing the time
     cout << "[AFTER] System Time " << std::ctime(&start_time) << "\n";
 
-
     // Now attempt to generate a date_object:
-
-    std::chrono::time_point<std::chrono::system_clock> date_object = generate_date_object(2024, 2, 15);
+    std::chrono::time_point<std::chrono::system_clock> date_object = generate_date_object(2100, 2, 15); 
     if (date_object.time_since_epoch() == std::chrono::seconds(0)) {
         cerr << "Error: Something wrong happened while creating the date object!\n";
     }
