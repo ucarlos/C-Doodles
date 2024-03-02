@@ -123,7 +123,7 @@ int main(int argc, char *argv[]) {
     while ((option = getopt(argc, argv, "r:i")) != -1) {
         switch (option) {
         case 'r':
-            regex_pattern = string{optarg};
+            regex_pattern = std::string{optarg};
             break;
         case 'i':
             interactive_mode();
@@ -141,8 +141,7 @@ int main(int argc, char *argv[]) {
 
     // Now attempt to grab the string:
     searched_string = argv[optind];
-        
-    vector<string> result = get_all_regex_matches(regex_pattern, searched_string);
+	vector<string> result = get_all_regex_matches(regex_pattern, searched_string);
 
     if (result.empty()) {
         cout << "No matches were found for " << searched_string << "using that regex pattern.\n";
