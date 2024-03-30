@@ -1,6 +1,6 @@
 /*
  * -----------------------------------------------------------------------------
- * Created by Ulysses Carlos on 01/18/2024 at 08:50 PM
+ * Created by Ulysses Carlos on 03/01/2024 at 08:50 PM
  *
  * CalendarTest.cc
  *
@@ -16,14 +16,14 @@
 
 using namespace std;
 
-bool is_leap_year(int64_t year) {
+bool is_leap_year(int32_t year) {
     if (!(year % 100))
         return !(year % 400);
     else
         return !(year % 4);
 }
 
-bool verify_date_string(int64_t year,
+bool verify_date_string(int32_t year,
                         uint32_t month,
                         uint32_t day,
                         uint32_t hour = 0,
@@ -48,7 +48,19 @@ bool verify_date_string(int64_t year,
         return (1 <= day && day <= normal_year_month_day_list[month - 1]);
 }
 
-std::chrono::time_point<std::chrono::system_clock> generate_date_object(int64_t year,
+
+/**
+ * Generate a chrono::time_point time object given a year, month, day and optional
+ * hour, minute, and second values.
+ * @param year
+ * @param month
+ * @param day
+ * @param hour
+ * @param minute
+ * @param second
+ * @return an valid time_point if it passes validation; An default time_point object otherwise.
+ */
+std::chrono::time_point<std::chrono::system_clock> generate_date_object(int32_t year,
                                                                         uint32_t month,
                                                                         uint32_t day,
                                                                         uint32_t hour = 0,
@@ -65,7 +77,6 @@ std::chrono::time_point<std::chrono::system_clock> generate_date_object(int64_t 
     std::tm time_struct{};
     format_stringstream >> std::get_time(&time_struct, "%Y-%m-%d %H:%M:%S");
     return std::chrono::system_clock::from_time_t(std::mktime(&time_struct));
-    
 }
 
 int main() {
@@ -80,7 +91,7 @@ int main() {
     cout << "[AFTER] System Time " << std::ctime(&start_time) << "\n";
 
     // Now attempt to generate a date_object:
-    std::chrono::time_point<std::chrono::system_clock> date_object = generate_date_object(2100, 2, 15); 
+    std::chrono::time_point<std::chrono::system_clock> date_object = generate_date_object(2024, 2, 15); 
     if (date_object.time_since_epoch() == std::chrono::seconds(0)) {
         cerr << "Error: Something wrong happened while creating the date object!\n";
     }
