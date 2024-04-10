@@ -91,7 +91,7 @@ int main() {
     cout << "[AFTER] System Time " << std::ctime(&start_time) << "\n";
 
     // Now attempt to generate a date_object:
-    std::chrono::time_point<std::chrono::system_clock> date_object = generate_date_object(2024, 2, 15); 
+    std::chrono::time_point<std::chrono::system_clock> date_object = generate_date_object(2024, 2, 15);
     if (date_object.time_since_epoch() == std::chrono::seconds(0)) {
         cerr << "Error: Something wrong happened while creating the date object!\n";
     }
@@ -101,5 +101,5 @@ int main() {
 
         std::time_t time_object = std::chrono::system_clock::to_time_t(date_object);
         cout << "My Birthday was on " << std::ctime(&time_object) << "\n";
-    }   
+    }
 }
