@@ -83,23 +83,37 @@ int main() {
     std::chrono::time_point<std::chrono::system_clock> current_time_point = std::chrono::system_clock::now();
     
     std::time_t start_time = std::chrono::system_clock::to_time_t(current_time_point);
-    cout << "[BEFORE] System Time " << std::ctime(&start_time);
+    cout << "Current System Time is " << std::ctime(&start_time);
 
     current_time_point += std::chrono::hours(12);
     start_time = std::chrono::system_clock::to_time_t(current_time_point);
     // Now incrementing the time
-    cout << "[AFTER] System Time " << std::ctime(&start_time) << "\n";
+    cout << "After incrementing the time by 12 hours, the new time is " << std::ctime(&start_time) << "\n";
 
     // Now attempt to generate a date_object:
-    std::chrono::time_point<std::chrono::system_clock> date_object = generate_date_object(2024, 2, 15);
-    if (date_object.time_since_epoch() == std::chrono::seconds(0)) {
+    std::chrono::time_point<std::chrono::system_clock> birthday_object = generate_date_object(2024, 2, 15);
+    if (birthday_object.time_since_epoch() == std::chrono::seconds(0)) {
         cerr << "Error: Something wrong happened while creating the date object!\n";
     }
     else {
-        date_object += std::chrono::hours(10);
-        date_object += std::chrono::minutes(5);
+        // Set the birthday to 10:05 PM
+        birthday_object += std::chrono::hours(22);
+        birthday_object += std::chrono::minutes(5);
 
-        std::time_t time_object = std::chrono::system_clock::to_time_t(date_object);
-        cout << "My Birthday was on " << std::ctime(&time_object) << "\n";
+        std::time_t birthday_timet_object = std::chrono::system_clock::to_time_t(birthday_object);
+        // Annoying bullshit to change the Www Mmm dd hh:mm:ss yyyy format
+        const int c_string_length = 100;
+        char birthday_c_string[c_string_length];
+        std::strftime(birthday_c_string, c_string_length, "%a %B %0d %H:%M:%S %Y", std::localtime(&birthday_timet_object));
+
+        // Subtracting two time_points leads to a duration object which has to be cast to days:
+        auto difference = current_time_point - birthday_object;
+	    auto difference_in_days= std::chrono::duration_cast<std::chrono::days>(difference);
+        auto difference_in_months = std::chrono::duration_cast<std::chrono::minutes>(difference);
+
+        std::cout << "My Birthday was on " << birthday_c_string << ", which was "
+				  << difference_in_days.count() << " days ago ("
+				  << difference_in_months.count() << " minutes ago)\n";
+
     }
 }
