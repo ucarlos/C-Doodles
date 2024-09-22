@@ -58,5 +58,6 @@ target_link_libraries(ConnectionTest pq pqxx)
 # Multithreading Programs
 add_executable(ExampleThread src/Multithreading/ExampleThread.cc)
 add_executable(ArrayTest src/STL-Implementations/TestArray.cc)
-add_executable(CalendarTest src/Chrono/CalendarTest.cc
-        src/Chrono/CalendarTest.cc)
+
+add_executable(CalendarTest src/Chrono/CalendarTest.cc)
+#set_property(TARGET CalendarTest PROPERTY CXX_STANDARD 17)

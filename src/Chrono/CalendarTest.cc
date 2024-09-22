@@ -15,6 +15,7 @@
 #include <cstdint>
 
 using namespace std;
+using days = std::chrono::duration<int64_t, ratio<86400>>;
 
 bool is_leap_year(int32_t year) {
     if (!(year % 100))
@@ -67,9 +68,9 @@ std::chrono::time_point<std::chrono::system_clock> generate_date_object(int32_t 
                                                                         uint32_t minute = 0,
                                                                         uint32_t second = 0) {
     if (!verify_date_string(year, month, day)) {
-		// Return a default time_point object instead of null or an exception
+        // Return a default time_point object instead of null or an exception
         return std::chrono::time_point<std::chrono::system_clock> {};
-	}
+    }
 
     stringstream format_stringstream;
     format_stringstream << year << "-" << month << "-" << day << " " << hour << ":" << minute << ":" << second;
@@ -107,13 +108,12 @@ int main() {
         std::strftime(birthday_c_string, c_string_length, "%a %B %0d %H:%M:%S %Y", std::localtime(&birthday_timet_object));
 
         // Subtracting two time_points leads to a duration object which has to be cast to days:
-        auto difference = current_time_point - birthday_object;
-	    auto difference_in_days= std::chrono::duration_cast<std::chrono::days>(difference);
+        auto difference = current_time_point - birthday_object; 
+        auto difference_in_days= std::chrono::duration_cast<days>(difference);
         auto difference_in_months = std::chrono::duration_cast<std::chrono::minutes>(difference);
-
+        
         std::cout << "My Birthday was on " << birthday_c_string << ", which was "
-				  << difference_in_days.count() << " days ago ("
-				  << difference_in_months.count() << " minutes ago)\n";
-
+                  << difference_in_days.count() << " days ago ("
+                  << difference_in_months.count() << " minutes ago)\n";
     }
 }

@@ -75,21 +75,20 @@ int main() {
     // std::set_difference, where elements need to be inserted, not overwritten, and the insertion must respect
     // the container's rules (such as order in a set).
 
-    std::chrono::time_point start = std::chrono::system_clock::now();
+    std::chrono::time_point algorithm_start = std::chrono::system_clock::now();
     std::set_difference(initial_map.begin(), initial_map.end(),
                         secondary_map.begin(), secondary_map.end(),
                         std::inserter(output_map, output_map.begin()), compare_item_function
     );
 
-    std::chrono::time_point end = std::chrono::system_clock::now();
-    std::chrono::duration difference = end - start;
+    std::chrono::time_point algorithm_end = std::chrono::system_clock::now();
+    std::chrono::duration algorithm_difference = algorithm_end - algorithm_start;
 
     cout << "Populating both maps with " << MAX_SIZE << " items took "
-		 << population_difference.count() << "ns"
-		 << " (" << (std::chrono::duration_cast<std::chrono::milliseconds>(population_difference).count()) << "ms)\n";
-	
+                 << population_difference.count() << "ns"
+                 << " (" << (std::chrono::duration_cast<std::chrono::milliseconds>(population_difference).count()) << "ms)\n";
+        
     cout << "std::set_difference call took "
-		 << difference.count() << "ns"
-		 << " (" << (std::chrono::duration_cast<std::chrono::milliseconds>(difference).count()) << "ms)\n";
-
+         << algorithm_difference.count() << "ns"
+         << " (" << (std::chrono::duration_cast<std::chrono::milliseconds>(algorithm_difference).count()) << "ms)\n";
 }
