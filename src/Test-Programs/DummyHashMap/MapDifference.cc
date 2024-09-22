@@ -84,12 +84,12 @@ int main() {
     std::chrono::time_point end = std::chrono::system_clock::now();
     std::chrono::duration difference = end - start;
 
-    cout << "Populating both maps took "
-		 << population_difference
-		 << " (" << (std::chrono::duration_cast<std::chrono::milliseconds>(population_difference)) << ")\n";
+    cout << "Populating both maps with " << MAX_SIZE << " items took "
+		 << population_difference.count() << "ns"
+		 << " (" << (std::chrono::duration_cast<std::chrono::milliseconds>(population_difference).count()) << "ms)\n";
 	
     cout << "std::set_difference call took "
-		 << difference
-		 << " (" << (std::chrono::duration_cast<std::chrono::milliseconds>(difference)) << ")\n";
+		 << difference.count() << "ns"
+		 << " (" << (std::chrono::duration_cast<std::chrono::milliseconds>(difference).count()) << "ms)\n";
 
 }
