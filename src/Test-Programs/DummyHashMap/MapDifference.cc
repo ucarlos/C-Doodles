@@ -21,40 +21,40 @@ using namespace std;
 const int MAX_SIZE = 100000;
 
 int main() {
-	std::map<std::string, Item> initial_map = {};
+    std::map<std::string, Item> initial_map = {};
 
     // NOTE: If you ever want to append to an ostringstream object after setting the string via ostringstream::str(),
     //       you need to set its mode to `ios_base::app` in its constructor.
-	std::ostringstream output_stream{std::ios_base::app};
+    std::ostringstream output_stream{std::ios_base::app};
 
     std::chrono::time_point population_start = std::chrono::system_clock::now();
 
 
-	for (int i = 0; i < MAX_SIZE; i++) {
+    for (int i = 0; i < MAX_SIZE; i++) {
         output_stream.clear();
         output_stream.str("example.item.");
         output_stream << std::setfill('0') << std::setw(8);
-		output_stream << i;
+        output_stream << i;
 
-		std::string key_name = output_stream.str();
-		
-		initial_map.insert({key_name, Item{key_name, "0", "Example Enterprise"}});
-		initial_map.insert({key_name, Item{key_name, "1", "Example Enterprise"}});
-	}
-	
+        std::string key_name = output_stream.str();
+        
+        initial_map.insert({key_name, Item{key_name, "0", "Example Enterprise"}});
+        initial_map.insert({key_name, Item{key_name, "1", "Example Enterprise"}});
+    }
+    
 
-	std::map<std::string, Item> secondary_map = {};
-	for (int i = 0; i < (MAX_SIZE >> 1); i++) {
-		output_stream.str("example.item.");
-		output_stream << i;
+    std::map<std::string, Item> secondary_map = {};
+    for (int i = 0; i < (MAX_SIZE >> 1); i++) {
+        output_stream.str("example.item.");
+        output_stream << i;
 
-		std::string key_name = output_stream.str();
-		
-		secondary_map.insert({key_name, Item{key_name, "0", "Example Enterprise"}});
-	}
+        std::string key_name = output_stream.str();
+        
+        secondary_map.insert({key_name, Item{key_name, "0", "Example Enterprise"}});
+    }
 
     std::chrono::time_point population_end = std::chrono::system_clock::now();
-    std::chrono::duration population_duration = population_end - population_start;
+    std::chrono::duration population_difference = population_end - population_start;
 
     std::map<std::string, Item> output_map = {};
 
@@ -84,24 +84,12 @@ int main() {
     std::chrono::time_point end = std::chrono::system_clock::now();
     std::chrono::duration difference = end - start;
 
-    // Other call that does not work for the above reason
-    /*
-    std::set_difference(initial_map.begin(), initial_map.end(),
-                        secondary_map.begin(), secondary_map.end(),
-                        output_map.begin(), compare_item_function
-    );
-    */
-
-    /*
-	for (auto &i : output_map) {
-		std::cout << "Key: " << i.first 
-				  << "    Enterprise Name:" << i.second.get_enterprise_name()
-				  << "    Preference Value:" << i.second.get_preference_value()
-				  << "\n";
-	}
-*/
-    cout << "Populating both maps took " << std::chrono::duration_cast<std::chrono::milliseconds>(population_duration)
-		 << "\n";
-    cout << "std::set_difference call took " << std::chrono::duration_cast<std::chrono::milliseconds>(difference) << "\n";
+    cout << "Populating both maps took "
+		 << population_difference
+		 << " (" << (std::chrono::duration_cast<std::chrono::milliseconds>(population_difference)) << ")\n";
+	
+    cout << "std::set_difference call took "
+		 << difference
+		 << " (" << (std::chrono::duration_cast<std::chrono::milliseconds>(difference)) << ")\n";
 
 }

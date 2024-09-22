@@ -37,7 +37,7 @@ add_executable(Itoa src/Test-Programs/Itoa.cc)
 add_executable(Encoding_Test src/Test-Programs/Encoding_Test.cc)
 add_executable(DequeTest src/Test-Programs/DequeTest.cc)
 add_executable(BitChecker src/Test-Programs/BitChecker.cc)
-add_executable(TestHashMap src/Test-Programs/DummyHashMap/TestHashMap.cc)
+add_executable(MapDifference src/Test-Programs/DummyHashMap/MapDifference.cc)
 
 add_executable(TestLogger src/Test-Programs/TestLogger.cc)
 target_link_libraries(TestLogger fmt)
