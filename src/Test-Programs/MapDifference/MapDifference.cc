@@ -15,7 +15,6 @@
 #include <chrono>
 #include "Item.hpp"
 
-
 using namespace std;
 
 const int MAX_SIZE = 100000;
@@ -23,8 +22,9 @@ const int MAX_SIZE = 100000;
 int main() {
     std::map<std::string, Item> initial_map = {};
 
-    // NOTE: If you ever want to append to an ostringstream object after setting the string via ostringstream::str(),
-    //       you need to set its mode to `ios_base::app` in its constructor.
+    // NOTE: If you ever want to append to an ostringstream object after setting
+    //       the string via ostringstream::str(), you need to set its mode to
+    //       `ios_base::app` in its constructor.
     std::ostringstream output_stream{std::ios_base::app};
 
     std::chrono::time_point population_start = std::chrono::system_clock::now();
@@ -85,8 +85,8 @@ int main() {
     std::chrono::duration algorithm_difference = algorithm_end - algorithm_start;
 
     cout << "Populating both maps with " << MAX_SIZE << " items took "
-                 << population_difference.count() << "ns"
-                 << " (" << (std::chrono::duration_cast<std::chrono::milliseconds>(population_difference).count()) << "ms)\n";
+         << population_difference.count() << "ns"
+         << " (" << (std::chrono::duration_cast<std::chrono::milliseconds>(population_difference).count()) << "ms)\n";
         
     cout << "std::set_difference call took "
          << algorithm_difference.count() << "ns"
