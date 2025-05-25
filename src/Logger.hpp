@@ -71,7 +71,6 @@ private:
     spdlog::details::log_msg _log_message{};
     std::string _logger_name{"logger"};
     // This is set as a unique_ptr to shut up clang-d from reporting "call to implicitly-deleted copy constructor".
-    // It is obviously not,
     std::unique_ptr<spdlog::sinks::ansicolor_stderr_sink_mt> _logger{ new spdlog::sinks::ansicolor_stderr_sink_mt{} };
         
     bool log_level_is_at_least(const spdlog::level::level_enum required_level) {

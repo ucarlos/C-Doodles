@@ -13,7 +13,7 @@
 #include <cmath>
 using namespace std;
 
-std::string shift_string(const string &s, const int16_t shift){
+std::string shift_string(const string &s, const int16_t shift) {
     // If shift is zero, return immediately.
     if (!shift) return s;
     
@@ -21,7 +21,7 @@ std::string shift_string(const string &s, const int16_t shift){
     int16_t adjusted_shift;
     char temp;
     
-    for (char &i : result){
+    for (char &i : result) {
         if (!isalpha(i)) continue;
     
         temp = tolower(i);
@@ -63,7 +63,7 @@ std::string shift_string(const string &s, const int16_t shift){
     return result;
 }
 
-int main(void){
+int main(void) {
     string input;
     int16_t max_shift = 26;
     int16_t shift;
@@ -76,10 +76,8 @@ int main(void){
     // If shift is outside [-26 : 26], then absolute it and do modulus:
     int32_t absolute = abs(shift);
     
-    if (absolute > max_shift){
-        shift = (shift < 0) ? -1 * (absolute % max_shift)
-                            : (absolute % max_shift);
-    
+    if (absolute > max_shift) {
+        shift = (shift < 0) ? (-1 * (absolute % max_shift)) : (absolute % max_shift);        
         cerr << "Warning: Shift is outside range [-26: 26]. Readjusting to "
              << shift << endl << endl;
     }
