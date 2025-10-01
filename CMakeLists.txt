@@ -26,7 +26,7 @@ add_executable(Snake src/Games/Snake.cc)
 add_executable(Integer_to_English src/Standalone/Integer_to_English.cc)
 add_executable(Check_Digits src/Standalone/Check_Strings_For_Digits.c)
 add_executable(Mark_Example src/Standalone/Mark_Example.cc)
-add_executable(Caesar_Cypher src/Standalone/Caesar_Cypher.cc)
+add_executable(Caesar_Cipher src/Standalone/Caesar_Cipher.cc)
 
 # Test Programs
 add_executable(Word_Count src/Test-Programs/Word_Count.c)

@@ -56,14 +56,13 @@ std::string shift_string(const string &s, const int16_t shift) {
         // }
     
         // Now readjust according to case
-        i = (isupper(i)) ? toupper(temp) : temp;
-    
+        i = (isupper(i)) ? toupper(temp) : temp;    
     }
     
     return result;
 }
 
-int main(void) {
+int main() {
     string input;
     int16_t max_shift = 26;
     int16_t shift;
@@ -77,7 +76,7 @@ int main(void) {
     int32_t absolute = abs(shift);
     
     if (absolute > max_shift) {
-        shift = (shift < 0) ? (-1 * (absolute % max_shift)) : (absolute % max_shift);        
+        shift = (shift < 0) ? (-1 * (absolute % max_shift)) : (absolute % max_shift);
         cerr << "Warning: Shift is outside range [-26: 26]. Readjusting to "
              << shift << endl << endl;
     }
