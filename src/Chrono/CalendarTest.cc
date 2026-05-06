@@ -24,7 +24,7 @@ bool is_leap_year(int32_t year) {
         return !(year % 4);
 }
 
-bool verify_date_string(int32_t year,
+bool verify_date_string(int32_t  year,
                         uint32_t month,
                         uint32_t day,
                         uint32_t hour = 0,
@@ -38,7 +38,7 @@ bool verify_date_string(int32_t year,
 
     if (!(0 <= hour && hour <= 23) || !(0 <= minute && minute <= 59) || !(0 <= second && second <= 59))
         return false;
-    
+
     // Now determine if the date is valid or not:
     const int normal_year_month_day_list[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
     const int leap_year_month_day_list[] = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
@@ -61,7 +61,7 @@ bool verify_date_string(int32_t year,
  * @param second
  * @return an valid time_point if it passes validation; An default time_point object otherwise.
  */
-std::chrono::time_point<std::chrono::system_clock> generate_date_object(int32_t year,
+std::chrono::time_point<std::chrono::system_clock> generate_date_object(int32_t  year,
                                                                         uint32_t month,
                                                                         uint32_t day,
                                                                         uint32_t hour = 0,
@@ -82,7 +82,7 @@ std::chrono::time_point<std::chrono::system_clock> generate_date_object(int32_t 
 
 int main() {
     std::chrono::time_point<std::chrono::system_clock> current_time_point = std::chrono::system_clock::now();
-    
+
     std::time_t start_time = std::chrono::system_clock::to_time_t(current_time_point);
     cout << "Current System Time is " << std::ctime(&start_time);
 
@@ -108,10 +108,10 @@ int main() {
         std::strftime(birthday_c_string, c_string_length, "%a %B %0d %H:%M:%S %Y", std::localtime(&birthday_timet_object));
 
         // Subtracting two time_points leads to a duration object which has to be cast to days:
-        auto difference = current_time_point - birthday_object; 
+        auto difference = current_time_point - birthday_object;
         auto difference_in_days= std::chrono::duration_cast<days>(difference);
         auto difference_in_months = std::chrono::duration_cast<std::chrono::minutes>(difference);
-        
+
         std::cout << "My Birthday was on " << birthday_c_string << ", which was "
                   << difference_in_days.count() << " days ago ("
                   << difference_in_months.count() << " minutes ago)\n";

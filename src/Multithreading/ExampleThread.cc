@@ -22,7 +22,7 @@ public:
     ExampleFunction(int val) : value{val} { }
     ExampleFunction(string tex, int val) : text{tex}, value{val} {}
     ExampleFunction(string tex, int val, int sleep_dur_ms): text{tex}, value{val}, sleep_duration_ms{sleep_dur_ms} { }
-    
+
     void operator()() {
         for (int i = value; i >= 0; i--) {
             // mutex_lock.lock();
